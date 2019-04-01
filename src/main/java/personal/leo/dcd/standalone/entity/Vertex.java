@@ -18,22 +18,28 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class Vertex {
-    private Long id;
-    private LinkedHashSet<Long> inNeighborsId = new LinkedHashSet<>();
-    private LinkedHashSet<Long> outNeighborsId = new LinkedHashSet<>();
+    private long id;
+    /**
+     * 当前节点的入节点
+     */
+    private LinkedHashSet<Long> inNeighborVtxIds = new LinkedHashSet<>();
+    /**
+     * 当前节点的出节点
+     */
+    private LinkedHashSet<Long> outNeighborVtxIds = new LinkedHashSet<>();
     private boolean active = true;
 
-    public Vertex(Long id) {
+    public Vertex(long id) {
         this.id = id;
     }
 
     public synchronized Vertex in(Vertex vertex) {
-        inNeighborsId.add(vertex.id);
+        inNeighborVtxIds.add(vertex.id);
         return this;
     }
 
     public synchronized Vertex out(Vertex vertex) {
-        outNeighborsId.add(vertex.id);
+        outNeighborVtxIds.add(vertex.id);
         return this;
     }
 
