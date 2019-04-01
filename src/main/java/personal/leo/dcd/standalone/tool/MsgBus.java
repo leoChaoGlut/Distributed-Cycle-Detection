@@ -1,4 +1,4 @@
-package personal.leo.dcd.standalone.entity;
+package personal.leo.dcd.standalone.tool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,8 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import personal.leo.dcd.standalone.entity.Msg;
+import personal.leo.dcd.standalone.entity.MsgId;
 
 /**
  * @author leo
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
 @Setter
 public class MsgBus {
     /**
-     * TODO 单机版,不清理消息的 key
+     * TODO 单机版,仅清理value,不清理消息的 key
      */
     Map<MsgId, List<Msg>> msgBus = new HashMap<>();
 
