@@ -1,9 +1,11 @@
 package personal.leo.dcd.entity;
 
 import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -35,5 +37,10 @@ public class Msg {
             .stream()
             .min(Long::compareTo)
             .orElse(null);
+    }
+
+    @Override
+    public String toString() {
+        return vtxSeq.stream().map(String::valueOf).collect(Collectors.joining(","));
     }
 }

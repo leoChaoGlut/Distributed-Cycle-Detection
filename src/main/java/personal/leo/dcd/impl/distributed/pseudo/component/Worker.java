@@ -1,79 +1,48 @@
-package personal.leo.dcd.impl.standalone;
+package personal.leo.dcd.impl.distributed.pseudo.component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
-import org.junit.Before;
-import org.junit.Test;
 import personal.leo.dcd.entity.Msg;
-import personal.leo.dcd.util.Id;
-import personal.leo.dcd.util.MsgBus;
 import personal.leo.dcd.entity.MsgId;
 import personal.leo.dcd.entity.Vertex;
+import personal.leo.dcd.util.MsgBus;
 
 /**
  * @author leo
  * @date 2019-03-29
- * Dcd: Distributed Cycle Detection
- * vtx: Vertex
- * msg: Message
- * Iter: Iterator
- * seq: Sequence
  */
-public class StandaloneTest {
+@Getter
+public class Worker implements Runnable {
 
-    Set<Vertex> activeVtxs = new LinkedHashSet<>();
+    private int id;
+    @Setter
+    private CountDownLatch latch;
+    @Setter
+    private int round;
 
-    /**
-     * 在 main() 之前执行
-     */
-    @Before
-    public void before() {
-        Vertex v1 = new Vertex(Id.next());
-        Vertex v2 = new Vertex(Id.next());
-        Vertex v3 = new Vertex(Id.next());
-        Vertex v4 = new Vertex(Id.next());
-        Vertex v5 = new Vertex(Id.next());
-
-        v1.out(v2);
-        v2.out(v3);
-        v3.out(v4).out(v5);
-        v4.out(v2);
-
-        activeVtxs.addAll(Arrays.asList(v1, v2, v3, v4, v5));
+    public Worker(int id) {
+        this.id = id;
     }
 
-    @Test
-    public void main() {
-        int round = 0;
+    @Override
+    public void run() {
+        List<Vertex> activeVtxs = VertexHolder.fetchActived(id);
 
-        while (!activeVtxs.isEmpty()) {
-            Iterator<Vertex> vtxIter = activeVtxs.iterator();
-            while (vtxIter.hasNext()) {
-                Vertex vtx = vtxIter.next();
-
-                detect(round, vtx);
-
-                if (!vtx.isActive()) {
-                    vtxIter.remove();
-                }
-            }
-            round++;
+        for (Vertex activeVtx : activeVtxs) {
+            detect(round, activeVtx);
         }
-
+        latch.countDown();
     }
 
-    /**
-     * @param round  第几轮
-     * @param curVtx Current Vetex
-     */
     public void detect(int round, Vertex curVtx) {
         //如果是第0轮,只需要把当前 vertex 的 id 作为 msg 发送给它的所有 outNeighbors
         if (round == 0) {
@@ -101,7 +70,8 @@ public class StandaloneTest {
                         //discard,说明已经被检测过
                     } else {
                         String vtxSeqStr = vtxSeq.stream().map(String::valueOf).collect(Collectors.joining("->"));
-                        throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
+                        System.out.println("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
+                        //throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
                     }
                 } else {
                     if (vtxSeq.contains(curVtxId)) {

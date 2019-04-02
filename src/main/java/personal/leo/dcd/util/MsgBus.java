@@ -15,19 +15,17 @@ import personal.leo.dcd.entity.MsgId;
  * @author leo
  * @date 2019-03-29
  */
-@Accessors(chain = true)
-@Setter
 public class MsgBus {
     /**
      * TODO 单机版,仅清理value,不清理消息的 key
      */
-    Map<MsgId, List<Msg>> msgBus = Collections.synchronizedMap(new HashMap<>());
+    private static Map<MsgId, List<Msg>> msgBus = new HashMap<>();
 
-    public boolean contains(MsgId msgId) {
+    public static synchronized boolean contains(MsgId msgId) {
         return msgBus.containsKey(msgId);
     }
 
-    public void append(MsgId msgId, Msg msg) {
+    public static synchronized void append(MsgId msgId, Msg msg) {
         if (msgBus.containsKey(msgId)) {
             msgBus.get(msgId).add(msg);
         } else {
@@ -40,7 +38,7 @@ public class MsgBus {
         }
     }
 
-    public List<Msg> get(MsgId msgId) {
+    public static synchronized List<Msg> get(MsgId msgId) {
         return msgBus.get(msgId);
     }
 }
