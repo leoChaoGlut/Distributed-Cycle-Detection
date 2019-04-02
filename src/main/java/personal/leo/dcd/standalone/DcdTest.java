@@ -13,7 +13,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import personal.leo.dcd.standalone.entity.Msg;
-import personal.leo.dcd.standalone.tool.MsgBus;
+import personal.leo.dcd.standalone.util.MsgBus;
 import personal.leo.dcd.standalone.entity.MsgId;
 import personal.leo.dcd.standalone.entity.Vertex;
 
