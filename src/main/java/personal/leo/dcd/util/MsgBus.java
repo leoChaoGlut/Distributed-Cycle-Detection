@@ -1,14 +1,15 @@
-package personal.leo.dcd.standalone.util;
+package personal.leo.dcd.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import personal.leo.dcd.standalone.entity.Msg;
-import personal.leo.dcd.standalone.entity.MsgId;
+import personal.leo.dcd.entity.Msg;
+import personal.leo.dcd.entity.MsgId;
 
 /**
  * @author leo
@@ -20,7 +21,7 @@ public class MsgBus {
     /**
      * TODO 单机版,仅清理value,不清理消息的 key
      */
-    Map<MsgId, List<Msg>> msgBus = new HashMap<>();
+    Map<MsgId, List<Msg>> msgBus = Collections.synchronizedMap(new HashMap<>());
 
     public boolean contains(MsgId msgId) {
         return msgBus.containsKey(msgId);

@@ -1,4 +1,4 @@
-package personal.leo.dcd.standalone.entity;
+package personal.leo.dcd.entity;
 
 import java.util.LinkedHashSet;
 

@@ -1,4 +1,4 @@
-package personal.leo.dcd.standalone;
+package personal.leo.dcd.impl.standalone;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
-import personal.leo.dcd.standalone.entity.Msg;
-import personal.leo.dcd.standalone.util.MsgBus;
-import personal.leo.dcd.standalone.entity.MsgId;
-import personal.leo.dcd.standalone.entity.Vertex;
+import personal.leo.dcd.entity.Msg;
+import personal.leo.dcd.util.MsgBus;
+import personal.leo.dcd.entity.MsgId;
+import personal.leo.dcd.entity.Vertex;
 
 /**
  * @author leo
@@ -26,7 +26,7 @@ import personal.leo.dcd.standalone.entity.Vertex;
  * Iter: Iterator
  * seq: Sequence
  */
-public class DcdTest {
+public class StandaloneTest {
 
     MsgBus msgBus = new MsgBus();
 
@@ -64,7 +64,7 @@ public class DcdTest {
     }
 
     @Test
-    public void dcdTest() {
+    public void main() {
         int round = 0;
 
         while (!activeVtxs.isEmpty()) {
