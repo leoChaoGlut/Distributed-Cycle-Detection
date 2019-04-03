@@ -38,6 +38,9 @@ public class RandomDag {
     private ChoiceSrcVtx choiceSrcVtx;
     private ChoiceDestVtx choiceDestVtx;
 
+    /**
+     * 仅存储 vtx 的 id,x,y 等信息,不包含 neighbors
+     */
     private Map<Long, Vertex> vtxHolder = new HashMap<>();
     private Vertex rootVtx = new Vertex(-1).setX(-1).setY(-1);
 
@@ -131,6 +134,9 @@ public class RandomDag {
             });
     }
 
+    /**
+     * @return vtxs with neighbors
+     */
     public List<Vertex> draw() {
 
         Map<Long, Vertex> vtxMap = new HashMap<>();
@@ -162,7 +168,7 @@ public class RandomDag {
 
     }
 
-    public List<Vertex> getAllVtxs() {
+    public List<Vertex> getAllVtxsWithoutNeighbors() {
         return new ArrayList<>(vtxHolder.values());
     }
 

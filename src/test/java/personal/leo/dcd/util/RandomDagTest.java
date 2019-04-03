@@ -1,14 +1,8 @@
 package personal.leo.dcd.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import lombok.Setter;
-import lombok.experimental.Accessors;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import personal.leo.dcd.entity.Vertex;
 
@@ -22,12 +16,24 @@ import personal.leo.dcd.entity.Vertex;
 
 public class RandomDagTest {
     @Test
-    public void test() {
-        RandomDag rd = RandomDag.matrix(10, 10, 10);
+    public void randomDagByMatrix() {
+        RandomDag rd = RandomDag.matrix(100, 10, 20);
         List<Vertex> vtxs = rd.draw();
-        List<Vertex> allVtxs = rd.getAllVtxs();
+        List<Vertex> allVtxsWithoutNeighbors = rd.getAllVtxsWithoutNeighbors();
 
-        for (Vertex vtx : allVtxs) {
+        printDagitty(vtxs, allVtxsWithoutNeighbors);
+
+    }
+
+    /**
+     * 将输出的内容放到 http://www.dagitty.net/dags.html#
+     * 可将生成的 dag 可视化展现
+     *
+     * @param vtxs
+     * @param allVtxsWithoutNeighbors
+     */
+    private void printDagitty(List<Vertex> vtxs, List<Vertex> allVtxsWithoutNeighbors) {
+        for (Vertex vtx : allVtxsWithoutNeighbors) {
             System.err.println(vtx.getId() + " 1 @10." + vtx.getX() + ",10." + vtx.getY());
         }
         System.out.println();
@@ -36,5 +42,16 @@ public class RandomDagTest {
                 .collect(Collectors.joining(" "))
             );
         }
+    }
+
+    @Test
+    public void randomDagByLine() {
+        RandomDag rd = RandomDag.line(10, 10);
+        List<Vertex> vtxs = rd.draw();
+        List<Vertex> allVtxsWithoutNeighbors = rd.getAllVtxsWithoutNeighbors();
+
+        System.out.println(vtxs);
+        System.out.println(allVtxsWithoutNeighbors);
+
     }
 }
