@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -14,9 +15,10 @@ import lombok.experimental.Accessors;
  * @date 2019-03-29
  */
 @Accessors(chain = true)
-@Getter
 @Setter
+@Getter
 @EqualsAndHashCode(of = {"id"})
+@NoArgsConstructor
 public class Vertex {
     private long id;
     /**

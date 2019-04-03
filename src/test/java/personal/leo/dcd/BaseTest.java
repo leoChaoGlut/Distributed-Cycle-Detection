@@ -17,8 +17,8 @@ public class BaseTest {
     protected String allVtxsWithoutNeighborsFilePath =
         "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/allVtxsWithoutNeighbors.json";
 
-    protected String vtxsFilePath
-        = "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/vtxs.json";
+    protected String relationsFilePath
+        = "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/relations.json";
 
     protected String dagittyFilePath
         = "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/dagitty.txt";

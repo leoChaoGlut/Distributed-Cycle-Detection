@@ -1,9 +1,6 @@
 package personal.leo.dcd.impl.standalone;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -11,7 +8,6 @@ import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import personal.leo.dcd.BaseTest;
@@ -70,7 +66,7 @@ public class StandaloneTest extends BaseTest {
     }
 
     private List<Vertex> jsonData() throws IOException {
-        String json = read(vtxsFilePath);
+        String json = read(relationsFilePath);
         return JSON.parseArray(json, Vertex.class);
     }
 

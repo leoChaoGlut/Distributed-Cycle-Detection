@@ -4,366 +4,388 @@
     "id": -1,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4609,
-      4739,
-      3846,
-      2442,
-      1040,
-      4117,
-      4246,
-      4630,
-      3735,
-      25,
-      3742,
-      3744,
-      420,
-      2727,
-      3239,
-      44,
-      3630,
-      4528,
-      1329,
-      4530,
-      3637,
-      3638,
-      2618,
-      3647,
-      3905,
-      4546,
-      4549,
-      1609,
-      2121,
-      4940,
+      2049,
+      4228,
+      11,
+      4747,
+      1421,
+      16,
+      3346,
+      1427,
+      4245,
+      2326,
+      4631,
+      1308,
+      3746,
+      3748,
+      934,
+      1831,
+      4649,
+      816,
+      4145,
+      2613,
+      4406,
+      2743,
+      3127,
+      4919,
+      1847,
+      4412,
+      2623,
+      4931,
+      3141,
+      326,
+      4039,
+      2503,
+      330,
+      4043,
+      4044,
       2636,
-      4046,
-      3536,
-      3410,
-      1748,
-      4822,
-      2011,
-      4316,
-      4445,
-      3937,
-      2917,
-      103,
-      4328,
-      4840,
-      4841,
-      4719,
-      2927,
-      4210,
-      2548,
-      3316,
-      3446,
-      3319,
-      1400,
-      2041,
-      4219,
-      636,
-      3836,
-      2814
+      3532,
+      4941,
+      3022,
+      4049,
+      2515,
+      3027,
+      1747,
+      2643,
+      4949,
+      2016,
+      4448,
+      2402,
+      3939,
+      4324,
+      3941,
+      4842,
+      3436,
+      621,
+      4211,
+      1528,
+      4731,
+      1532,
+      1534,
+      4607
     ],
     "x": -1,
     "y": -1
   },
   {
     "active": true,
-    "id": 4609,
+    "id": 326,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4719
+      1831
     ],
-    "x": 9,
-    "y": 46
+    "x": 26,
+    "y": 3
   },
   {
     "active": true,
-    "id": 3905,
+    "id": 4039,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4822
+      4245
     ],
-    "x": 5,
-    "y": 39
-  },
-  {
-    "active": true,
-    "id": 3846,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4546
-    ],
-    "x": 46,
-    "y": 38
-  },
-  {
-    "active": true,
-    "id": 1609,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3638
-    ],
-    "x": 9,
-    "y": 16
-  },
-  {
-    "active": true,
-    "id": 2121,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      2727
-    ],
-    "x": 21,
-    "y": 21
-  },
-  {
-    "active": true,
-    "id": 4046,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4549
-    ],
-    "x": 46,
+    "x": 39,
     "y": 40
   },
   {
     "active": true,
-    "id": 1040,
+    "id": 2503,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4246
-    ],
-    "x": 40,
-    "y": 10
-  },
-  {
-    "active": true,
-    "id": 3410,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3536
-    ],
-    "x": 10,
-    "y": 34
-  },
-  {
-    "active": true,
-    "id": 4630,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4739
-    ],
-    "x": 30,
-    "y": 46
-  },
-  {
-    "active": true,
-    "id": 3735,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3937
-    ],
-    "x": 35,
-    "y": 37
-  },
-  {
-    "active": true,
-    "id": 25,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3742
-    ],
-    "x": 25,
-    "y": 0
-  },
-  {
-    "active": true,
-    "id": 2011,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3647
-    ],
-    "x": 11,
-    "y": 20
-  },
-  {
-    "active": true,
-    "id": 3744,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4445
-    ],
-    "x": 44,
-    "y": 37
-  },
-  {
-    "active": true,
-    "id": 420,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      1748
-    ],
-    "x": 20,
-    "y": 4
-  },
-  {
-    "active": true,
-    "id": 2917,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4117
-    ],
-    "x": 17,
-    "y": 29
-  },
-  {
-    "active": true,
-    "id": 3239,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4549
-    ],
-    "x": 39,
-    "y": 32
-  },
-  {
-    "active": true,
-    "id": 103,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      2927
+      4607
     ],
     "x": 3,
-    "y": 1
+    "y": 25
   },
   {
     "active": true,
-    "id": 4328,
+    "id": 330,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4530
+      2643
     ],
-    "x": 28,
-    "y": 43
+    "x": 30,
+    "y": 3
   },
   {
     "active": true,
-    "id": 4840,
+    "id": 11,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4841
+      3141
     ],
-    "x": 40,
-    "y": 48
-  },
-  {
-    "active": true,
-    "id": 44,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      2548
-    ],
-    "x": 44,
+    "x": 11,
     "y": 0
   },
   {
     "active": true,
-    "id": 1329,
+    "id": 2636,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      3630
+      4043
     ],
-    "x": 29,
-    "y": 13
-  },
-  {
-    "active": true,
-    "id": 4210,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      4528
-    ],
-    "x": 10,
-    "y": 42
-  },
-  {
-    "active": true,
-    "id": 3316,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3319
-    ],
-    "x": 16,
-    "y": 33
-  },
-  {
-    "active": true,
-    "id": 3637,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3937
-    ],
-    "x": 37,
-    "y": 36
-  },
-  {
-    "active": true,
-    "id": 1400,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3446
-    ],
-    "x": 0,
-    "y": 14
-  },
-  {
-    "active": true,
-    "id": 2041,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      2442
-    ],
-    "x": 41,
-    "y": 20
-  },
-  {
-    "active": true,
-    "id": 2618,
-    "inNeighborVtxIds": [],
-    "outNeighborVtxIds": [
-      3836
-    ],
-    "x": 18,
+    "x": 36,
     "y": 26
   },
   {
     "active": true,
-    "id": 4219,
+    "id": 1421,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4940
+      1528
     ],
-    "x": 19,
-    "y": 42
+    "x": 21,
+    "y": 14
   },
   {
     "active": true,
-    "id": 636,
+    "id": 3022,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      2636
+      3027
+    ],
+    "x": 22,
+    "y": 30
+  },
+  {
+    "active": true,
+    "id": 16,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      1532
+    ],
+    "x": 16,
+    "y": 0
+  },
+  {
+    "active": true,
+    "id": 2515,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      2743
+    ],
+    "x": 15,
+    "y": 25
+  },
+  {
+    "active": true,
+    "id": 1427,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4842
+    ],
+    "x": 27,
+    "y": 14
+  },
+  {
+    "active": true,
+    "id": 1747,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      2049
+    ],
+    "x": 47,
+    "y": 17
+  },
+  {
+    "active": true,
+    "id": 2326,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      3532
+    ],
+    "x": 26,
+    "y": 23
+  },
+  {
+    "active": true,
+    "id": 4631,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4747
+    ],
+    "x": 31,
+    "y": 46
+  },
+  {
+    "active": true,
+    "id": 1308,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      2623
+    ],
+    "x": 8,
+    "y": 13
+  },
+  {
+    "active": true,
+    "id": 2016,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4228
+    ],
+    "x": 16,
+    "y": 20
+  },
+  {
+    "active": true,
+    "id": 2402,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      3746
+    ],
+    "x": 2,
+    "y": 24
+  },
+  {
+    "active": true,
+    "id": 3939,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      3941
+    ],
+    "x": 39,
+    "y": 39
+  },
+  {
+    "active": true,
+    "id": 3748,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4649
+    ],
+    "x": 48,
+    "y": 37
+  },
+  {
+    "active": true,
+    "id": 934,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4044
+    ],
+    "x": 34,
+    "y": 9
+  },
+  {
+    "active": true,
+    "id": 3436,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4949
     ],
     "x": 36,
+    "y": 34
+  },
+  {
+    "active": true,
+    "id": 621,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      1534
+    ],
+    "x": 21,
     "y": 6
   },
   {
     "active": true,
-    "id": 2814,
+    "id": 816,
     "inNeighborVtxIds": [],
     "outNeighborVtxIds": [
-      4316
+      4145
     ],
-    "x": 14,
-    "y": 28
+    "x": 16,
+    "y": 8
+  },
+  {
+    "active": true,
+    "id": 4211,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4324
+    ],
+    "x": 11,
+    "y": 42
+  },
+  {
+    "active": true,
+    "id": 2613,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      3346
+    ],
+    "x": 13,
+    "y": 26
+  },
+  {
+    "active": true,
+    "id": 4406,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4412
+    ],
+    "x": 6,
+    "y": 44
+  },
+  {
+    "active": true,
+    "id": 3127,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4049
+    ],
+    "x": 27,
+    "y": 31
+  },
+  {
+    "active": true,
+    "id": 4919,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4931
+    ],
+    "x": 19,
+    "y": 49
+  },
+  {
+    "active": true,
+    "id": 1847,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4448
+    ],
+    "x": 47,
+    "y": 18
+  },
+  {
+    "active": true,
+    "id": 4731,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4941
+    ],
+    "x": 31,
+    "y": 47
+  },
+  {
+    "active": true,
+    "id": 4412,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4211
+    ],
+    "x": 12,
+    "y": 44
+  },
+  {
+    "active": true,
+    "id": 4324,
+    "inNeighborVtxIds": [],
+    "outNeighborVtxIds": [
+      4412
+    ],
+    "x": 24,
+    "y": 43
   }
 ]

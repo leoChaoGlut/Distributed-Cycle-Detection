@@ -134,11 +134,11 @@ public class RandomDag {
     }
 
     /**
-     * @return vtxs with neighbors
+     * @return relations
      */
     public List<Vertex> draw() {
 
-        Map<Long, Vertex> vtxMap = new HashMap<>();
+        Map<Long, Vertex> relationMap = new HashMap<>();
 
         for (int i = 0; i < expectedEdgeCount; i++) {
             Vertex srcVtx = choiceSrcVtx.choice();
@@ -149,21 +149,21 @@ public class RandomDag {
 
             long srcVtxId = srcVtx.getId();
 
-            if (vtxMap.containsKey(srcVtxId)) {
-                vtxMap.get(srcVtxId).out(destVtx);
+            if (relationMap.containsKey(srcVtxId)) {
+                relationMap.get(srcVtxId).out(destVtx);
             } else {
                 srcVtx.out(destVtx);
-                vtxMap.put(srcVtxId, srcVtx);
+                relationMap.put(srcVtxId, srcVtx);
             }
 
         }
 
         vtxHolder.values().forEach(vtx -> rootVtx.out(vtx));
 
-        vtxMap.put(rootVtx.getId(), rootVtx);
+        relationMap.put(rootVtx.getId(), rootVtx);
         vtxHolder.put(rootVtx.getId(), rootVtx);
 
-        return new ArrayList<>(vtxMap.values());
+        return new ArrayList<>(relationMap.values());
 
     }
 
