@@ -1,6 +1,7 @@
 package personal.leo.dcd.entity;
 
 import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +17,6 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-@ToString
 public class Vertex {
     private long id;
     /**
@@ -28,6 +28,12 @@ public class Vertex {
      */
     private LinkedHashSet<Long> outNeighborVtxIds = new LinkedHashSet<>();
     private boolean active = true;
+
+    /**
+     * 绘图时使用
+     * http://www.dagitty.net/dags.html
+     */
+    private int x, y;
 
     public Vertex(long id) {
         this.id = id;
@@ -43,4 +49,16 @@ public class Vertex {
         return this;
     }
 
+    public synchronized Vertex copy() {
+        return new Vertex(this.id)
+            .setX(this.x)
+            .setY(this.y);
+    }
+
+    @Override
+    public String toString() {
+        String in = inNeighborVtxIds.stream().map(String::valueOf).collect(Collectors.joining(","));
+        String out = outNeighborVtxIds.stream().map(String::valueOf).collect(Collectors.joining(","));
+        return "[" + in + "->" + id + "->" + out + "]";
+    }
 }

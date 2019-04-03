@@ -1,15 +1,20 @@
 package personal.leo.dcd.impl.distributed.pseudo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 import personal.leo.dcd.entity.Vertex;
 import personal.leo.dcd.impl.distributed.pseudo.component.VertexHolder;
 import personal.leo.dcd.impl.distributed.pseudo.component.Worker;
 import personal.leo.dcd.util.Id;
+import personal.leo.dcd.util.RandomDag;
 
 /**
  * @author leo
@@ -65,6 +70,9 @@ public class PseudoDistributedTest {
 
     @Test
     public void moreData() {
-        //TODO
+        int workerCount = 10;
+        int vtxCount = 100_000;
+
     }
+
 }
