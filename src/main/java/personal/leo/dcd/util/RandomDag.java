@@ -1,17 +1,12 @@
 package personal.leo.dcd.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.apache.commons.lang3.RandomUtils;
 import personal.leo.dcd.entity.Vertex;
 
@@ -34,7 +29,11 @@ public class RandomDag {
 
     private int maxNodeCount;
 
-    private int edgeCount;
+    /**
+     * 期望有多少条边
+     * 由于部分方法中是随机数,可能导致边重复,这样的情况下,实际产出的边数可能小于expectedEdgeCount
+     */
+    private int expectedEdgeCount;
     private ChoiceSrcVtx choiceSrcVtx;
     private ChoiceDestVtx choiceDestVtx;
 
@@ -54,7 +53,7 @@ public class RandomDag {
     public static RandomDag line(int maxNodeCount, int edgeCount) {
         return new RandomDag()
             .setMaxNodeCount(maxNodeCount)
-            .setEdgeCount(edgeCount)
+            .setExpectedEdgeCount(edgeCount)
             .setChoiceSrcVtx(() -> {
                 int index = RandomUtils.nextInt(0, maxNodeCount);
 
@@ -104,7 +103,7 @@ public class RandomDag {
         return new RandomDag()
             .setMaxWidth(maxWidth)
             .setMaxDepth(maxDepth)
-            .setEdgeCount(edgeCount)
+            .setExpectedEdgeCount(edgeCount)
             .setDeptPow(deptPow)
             .setChoiceSrcVtx(() -> {
                 int x = RandomUtils.nextInt(0, maxWidth);
@@ -141,7 +140,7 @@ public class RandomDag {
 
         Map<Long, Vertex> vtxMap = new HashMap<>();
 
-        for (int i = 0; i < edgeCount; i++) {
+        for (int i = 0; i < expectedEdgeCount; i++) {
             Vertex srcVtx = choiceSrcVtx.choice();
             Vertex destVtx = choiceDestVtx.choice(srcVtx);
 

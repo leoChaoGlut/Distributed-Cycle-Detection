@@ -1,7 +1,5 @@
 package personal.leo.dcd.impl.standalone;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -9,11 +7,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
-import org.junit.Before;
-import org.junit.Test;
 import personal.leo.dcd.entity.Msg;
-import personal.leo.dcd.util.Id;
 import personal.leo.dcd.util.MsgBus;
 import personal.leo.dcd.entity.MsgId;
 import personal.leo.dcd.entity.Vertex;
@@ -27,31 +23,16 @@ import personal.leo.dcd.entity.Vertex;
  * Iter: Iterator
  * seq: Sequence
  */
-public class StandaloneTest {
+@AllArgsConstructor
+public class Standalone {
 
-    Set<Vertex> activeVtxs = new LinkedHashSet<>();
+    private Set<Vertex> activeVtxs = new LinkedHashSet<>();
 
-    /**
-     * 在 main() 之前执行
-     */
-    @Before
-    public void before() {
-        Vertex v1 = new Vertex(Id.next());
-        Vertex v2 = new Vertex(Id.next());
-        Vertex v3 = new Vertex(Id.next());
-        Vertex v4 = new Vertex(Id.next());
-        Vertex v5 = new Vertex(Id.next());
-
-        v1.out(v2);
-        v2.out(v3);
-        v3.out(v4).out(v5);
-        v4.out(v2);
-
-        activeVtxs.addAll(Arrays.asList(v1, v2, v3, v4, v5));
+    public static void run(Set<Vertex> vtxs) {
+        new Standalone(vtxs).doRun();
     }
 
-    @Test
-    public void main() {
+    private void doRun() {
         int round = 0;
 
         while (!activeVtxs.isEmpty()) {
@@ -68,13 +49,14 @@ public class StandaloneTest {
             round++;
         }
 
+        System.out.println("no circular found.");
     }
 
     /**
      * @param round  第几轮
      * @param curVtx Current Vetex
      */
-    public void detect(int round, Vertex curVtx) {
+    private void detect(int round, Vertex curVtx) {
         //如果是第0轮,只需要把当前 vertex 的 id 作为 msg 发送给它的所有 outNeighbors
         if (round == 0) {
             firstRound(round, curVtx);
