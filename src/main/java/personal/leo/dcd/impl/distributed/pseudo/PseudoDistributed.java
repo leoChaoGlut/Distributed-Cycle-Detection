@@ -69,10 +69,13 @@ public class PseudoDistributed {
         } else {
             int segSize = vtxs.size() / workers.size() + 1;
             for (int i = 0, workerIndex = 0; ; i += segSize, workerIndex++) {
-                if (i < vtxs.size()) {
-                    VertexHolder.put(workers.get(workerIndex).getId(), vtxs.subList(i, i + segSize));
+                int beginIndex = i;
+                int endIndex = i + segSize;
+
+                if (endIndex < vtxs.size()) {
+                    VertexHolder.put(workers.get(workerIndex).getId(), vtxs.subList(beginIndex, endIndex));
                 } else {
-                    VertexHolder.put(workers.get(workerIndex).getId(), vtxs.subList(i, vtxs.size()));
+                    VertexHolder.put(workers.get(workerIndex).getId(), vtxs.subList(beginIndex, vtxs.size()));
                     break;
                 }
             }

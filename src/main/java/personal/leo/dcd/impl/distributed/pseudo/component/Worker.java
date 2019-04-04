@@ -35,12 +35,16 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        List<Vertex> activeVtxs = VertexHolder.fetchActived(id);
+        try {
+            List<Vertex> activeVtxs = VertexHolder.fetchActived(id);
 
-        for (Vertex activeVtx : activeVtxs) {
-            detect(round, activeVtx);
+            for (Vertex activeVtx : activeVtxs) {
+                detect(round, activeVtx);
+            }
+        } finally {
+            latch.countDown();
         }
-        latch.countDown();
+
     }
 
     public void detect(int round, Vertex curVtx) {

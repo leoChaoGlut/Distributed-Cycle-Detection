@@ -35,8 +35,6 @@ public class PseudoDistributedTest extends BaseTest {
     @Test
     public void fewData() throws InterruptedException {
         int workerCount = 2;
-        Worker w1 = new Worker(1);
-        Worker w2 = new Worker(2);
 
         Vertex v1 = new Vertex(Id.next());
         Vertex v2 = new Vertex(Id.next());
@@ -49,41 +47,17 @@ public class PseudoDistributedTest extends BaseTest {
         v3.out(v4).out(v5);
         v4.out(v2);
 
-        VertexHolder.put(w1.getId(), Arrays.asList(v1, v2));
-        VertexHolder.put(w2.getId(), Arrays.asList(v3, v4, v5));
+        List<Vertex> vtxs = Arrays.asList(v1, v2, v3, v4, v5);
 
-        List<Worker> workers = Arrays.asList(w1, w2);
+        PseudoDistributed.run(workerCount, vtxs);
 
-        ExecutorService es = Executors.newFixedThreadPool(2);
-
-        int round = 0;
-        while (VertexHolder.anyActive()) {
-            CountDownLatch latch = new CountDownLatch(workerCount);
-
-            distributedDetect(workers, es, round, latch);
-
-            //在分布式环境下,需要一个 coordinator 来控制所有 worker 何时走向下一轮,一致性可通过 db 保证.
-            latch.await();
-
-            round++;
-        }
-
-    }
-
-    private void distributedDetect(List<Worker> workers, ExecutorService es, int round, CountDownLatch latch) {
-        for (Worker worker : workers) {
-            worker.setRound(round);
-            worker.setLatch(latch);
-
-            es.submit(worker);
-        }
     }
 
     @Test
-    public void moreData() {
+    public void moreData() throws IOException, InterruptedException {
         int workerCount = 10;
-        int vtxCount = 100_000;
-
+        List<Vertex> vtxs = jsonData();
+        PseudoDistributed.run(workerCount, vtxs);
     }
 
 }
