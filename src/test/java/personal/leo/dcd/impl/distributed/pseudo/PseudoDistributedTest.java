@@ -1,26 +1,37 @@
 package personal.leo.dcd.impl.distributed.pseudo;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
+import com.alibaba.fastjson.JSON;
+
+import org.junit.Before;
 import org.junit.Test;
+import personal.leo.dcd.BaseTest;
 import personal.leo.dcd.entity.Vertex;
 import personal.leo.dcd.impl.distributed.pseudo.component.VertexHolder;
 import personal.leo.dcd.impl.distributed.pseudo.component.Worker;
+import personal.leo.dcd.impl.standalone.Standalone;
 import personal.leo.dcd.util.Id;
 import personal.leo.dcd.util.RandomDag;
 
 /**
  * @author leo
  * @date 2019-03-29
+ * Dcd: Distributed Cycle Detection
+ * vtx: Vertex
+ * msg: Message
+ * Iter: Iterator
+ * seq: Sequence
  */
-public class PseudoDistributedTest {
+public class PseudoDistributedTest extends BaseTest {
+
     @Test
     public void fewData() throws InterruptedException {
         int workerCount = 2;
@@ -41,13 +52,15 @@ public class PseudoDistributedTest {
         VertexHolder.put(w1.getId(), Arrays.asList(v1, v2));
         VertexHolder.put(w2.getId(), Arrays.asList(v3, v4, v5));
 
+        List<Worker> workers = Arrays.asList(w1, w2);
+
         ExecutorService es = Executors.newFixedThreadPool(2);
 
         int round = 0;
         while (VertexHolder.anyActive()) {
             CountDownLatch latch = new CountDownLatch(workerCount);
 
-            distributedDetect(w1, w2, es, round, latch);
+            distributedDetect(workers, es, round, latch);
 
             //在分布式环境下,需要一个 coordinator 来控制所有 worker 何时走向下一轮,一致性可通过 db 保证.
             latch.await();
@@ -57,15 +70,13 @@ public class PseudoDistributedTest {
 
     }
 
-    private void distributedDetect(Worker w1, Worker w2, ExecutorService es, int round, CountDownLatch latch) {
-        w1.setRound(round);
-        w1.setLatch(latch);
+    private void distributedDetect(List<Worker> workers, ExecutorService es, int round, CountDownLatch latch) {
+        for (Worker worker : workers) {
+            worker.setRound(round);
+            worker.setLatch(latch);
 
-        w2.setRound(round);
-        w2.setLatch(latch);
-
-        es.submit(w1);
-        es.submit(w2);
+            es.submit(worker);
+        }
     }
 
     @Test

@@ -45,29 +45,4 @@ public class StandaloneTest extends BaseTest {
         Standalone.run(activeVtxs);
     }
 
-    private List<Vertex> simpleData() {
-        Vertex v1 = new Vertex(Id.next());
-        Vertex v2 = new Vertex(Id.next());
-        Vertex v3 = new Vertex(Id.next());
-        Vertex v4 = new Vertex(Id.next());
-        Vertex v5 = new Vertex(Id.next());
-
-        v1.out(v2);
-        v2.out(v3);
-        v3.out(v4).out(v5);
-        v4.out(v2);
-
-        return Arrays.asList(v1, v2, v3, v4, v5);
-    }
-
-    private List<Vertex> randomData() {
-        RandomDag rd = RandomDag.line(10, 10);
-        return rd.draw();
-    }
-
-    private List<Vertex> jsonData() throws IOException {
-        String json = read(relationsFilePath);
-        return JSON.parseArray(json, Vertex.class);
-    }
-
 }

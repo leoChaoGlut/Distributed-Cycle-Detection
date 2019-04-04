@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import personal.leo.dcd.entity.Msg;
@@ -23,13 +24,17 @@ import personal.leo.dcd.entity.Vertex;
  * Iter: Iterator
  * seq: Sequence
  */
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Standalone {
 
     private Set<Vertex> activeVtxs = new LinkedHashSet<>();
 
     public static void run(Set<Vertex> vtxs) {
         new Standalone(vtxs).doRun();
+    }
+
+    private Standalone() {
+        throw new RuntimeException("Use static method 'run' instead");
     }
 
     private void doRun() {
