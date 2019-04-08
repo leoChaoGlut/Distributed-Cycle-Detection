@@ -22,10 +22,13 @@ import personal.leo.dcd.entity.Vertex;
 @Accessors(chain = true)
 @Setter
 public class RandomDag {
-
+    /**
+     * 当使用 matrix 构造 dag 时,vertex 的 id 等于 depth * depthPow + width
+     * id = depth * depthPow + width
+     */
+    private int deptPow;
     private int maxWidth;
     private int maxDepth;
-    private int deptPow;
 
     private int maxNodeCount;
 
