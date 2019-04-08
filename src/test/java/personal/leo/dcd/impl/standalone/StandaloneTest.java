@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
 
+import com.google.common.base.Stopwatch;
 import org.junit.Before;
 import org.junit.Test;
 import personal.leo.dcd.BaseTest;
@@ -26,23 +27,13 @@ import personal.leo.dcd.util.RandomDag;
  */
 public class StandaloneTest extends BaseTest {
 
-    Set<Vertex> activeVtxs = new LinkedHashSet<>();
-
-    /**
-     * 在 main() 之前执行
-     */
-    @Before
-    public void before() throws IOException {
-        //List<Vertex> vtxs = simpleData();
-        //List<Vertex> vtxs = randomData();
+    @Test
+    public void main() throws IOException {
         List<Vertex> vtxs = jsonData();
 
-        activeVtxs.addAll(vtxs);
-    }
-
-    @Test
-    public void main() {
-        Standalone.run(activeVtxs);
+        Stopwatch watch = Stopwatch.createStarted();
+        long cycleCount = Standalone.run(vtxs);
+        System.out.println("Standalone: " + watch.stop() + " - " + cycleCount);
     }
 
 }

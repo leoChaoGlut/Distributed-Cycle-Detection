@@ -11,6 +11,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomUtils;
 import personal.leo.dcd.entity.Vertex;
 import personal.leo.dcd.util.Id;
 import personal.leo.dcd.util.RandomDag;
@@ -54,8 +55,30 @@ public class BaseTest {
     }
 
     protected List<Vertex> randomData() {
-        RandomDag rd = RandomDag.line(10, 10);
+        return randomData(10, 10);
+    }
+
+    protected List<Vertex> randomData(int maxNodeCount, int edgeCount) {
+        RandomDag rd = RandomDag.line(maxNodeCount, edgeCount);
         return rd.draw();
+    }
+
+    protected void createCycle(List<Vertex> vtxs) {
+        Vertex rootVtx = null;
+        for (Vertex vtx : vtxs) {
+            if (vtx.getId() == -1L) {
+                rootVtx = vtx;
+                break;
+            }
+        }
+
+        if (rootVtx == null) {
+            throw new RuntimeException("Cannot found root vertex");
+        }
+
+        Vertex rdVtx = vtxs.get(RandomUtils.nextInt(0, vtxs.size()));
+
+        rdVtx.out(rootVtx);
     }
 
     protected List<Vertex> jsonData() throws IOException {

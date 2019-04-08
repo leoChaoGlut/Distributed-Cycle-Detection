@@ -6,14 +6,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.junit.Test;
 import personal.leo.dcd.entity.Vertex;
+import personal.leo.dcd.impl.distributed.pseudo.component.CycleCounter;
 import personal.leo.dcd.impl.distributed.pseudo.component.VertexHolder;
 import personal.leo.dcd.impl.distributed.pseudo.component.Worker;
 import personal.leo.dcd.util.Id;
@@ -30,20 +34,24 @@ public class PseudoDistributed {
     private List<Worker> workers;
     private List<Vertex> vtxs;
 
-    public static void run(int workerCount, List<Vertex> vtxs) throws InterruptedException {
+    private CycleCounter cycleCounter;
+
+    public static Long run(int workerCount, List<Vertex> vtxs) throws InterruptedException, ExecutionException {
+        CycleCounter cycleCounter = new CycleCounter();
+
         List<Worker> workers = new ArrayList<>(workerCount);
         for (int i = 0; i < workerCount; i++) {
-            workers.add(new Worker(i));
+            workers.add(new Worker(i, cycleCounter));
         }
 
-        new PseudoDistributed(workers, vtxs).doRun();
+        return new PseudoDistributed(workers, vtxs, cycleCounter).doRun();
     }
 
     private PseudoDistributed() {
         throw new RuntimeException("Use static method 'run' instead");
     }
 
-    private void doRun() throws InterruptedException {
+    private Long doRun() throws InterruptedException, ExecutionException {
         dispatchJobs();
 
         int round = 0;
@@ -59,6 +67,8 @@ public class PseudoDistributed {
 
             round++;
         }
+
+        return cycleCounter.get();
     }
 
     private void dispatchJobs() {

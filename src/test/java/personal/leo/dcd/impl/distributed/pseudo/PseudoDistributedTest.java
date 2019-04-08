@@ -6,11 +6,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.alibaba.fastjson.JSON;
 
+import com.google.common.base.Stopwatch;
 import org.junit.Before;
 import org.junit.Test;
 import personal.leo.dcd.BaseTest;
@@ -33,7 +35,7 @@ import personal.leo.dcd.util.RandomDag;
 public class PseudoDistributedTest extends BaseTest {
 
     @Test
-    public void fewData() throws InterruptedException {
+    public void fewData() throws InterruptedException, ExecutionException {
         int workerCount = 2;
 
         Vertex v1 = new Vertex(Id.next());
@@ -54,10 +56,21 @@ public class PseudoDistributedTest extends BaseTest {
     }
 
     @Test
-    public void moreData() throws IOException, InterruptedException {
-        int workerCount = 10;
+    public void moreData() throws InterruptedException, ExecutionException, IOException {
+        int workerCount = 16;
+
+        Stopwatch watch = Stopwatch.createStarted();
+        //List<Vertex> vtxs = randomData(10_000_000, 10_000_000);
         List<Vertex> vtxs = jsonData();
-        PseudoDistributed.run(workerCount, vtxs);
+        System.out.println(vtxs.size());
+        System.out.println(watch.stop());
+
+        createCycle(vtxs);
+
+        watch.reset().start();
+        Long cycleCount = PseudoDistributed.run(workerCount, vtxs);
+        System.out.println("PseudoDistributed: " + watch.stop() + " - " + cycleCount);
+
     }
 
 }

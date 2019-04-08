@@ -4,8 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicLong;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -27,21 +26,23 @@ import personal.leo.dcd.entity.Vertex;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Standalone {
 
-    private Set<Vertex> activeVtxs = new LinkedHashSet<>();
+    private List<Vertex> vtxs;
 
-    public static void run(Set<Vertex> vtxs) {
-        new Standalone(vtxs).doRun();
+    private final AtomicLong cycleCount = new AtomicLong(0L);
+
+    public static long run(List<Vertex> vtxs) {
+        return new Standalone(vtxs).doRun();
     }
 
     private Standalone() {
         throw new RuntimeException("Use static method 'run' instead");
     }
 
-    private void doRun() {
+    private long doRun() {
         int round = 0;
 
-        while (!activeVtxs.isEmpty()) {
-            Iterator<Vertex> vtxIter = activeVtxs.iterator();
+        while (!vtxs.isEmpty()) {
+            Iterator<Vertex> vtxIter = vtxs.iterator();
             while (vtxIter.hasNext()) {
                 Vertex vtx = vtxIter.next();
 
@@ -54,7 +55,9 @@ public class Standalone {
             round++;
         }
 
-        System.out.println("no circular found.");
+        //System.out.println("no circular found.");
+        return cycleCount.get();
+
     }
 
     /**
@@ -84,11 +87,15 @@ public class Standalone {
                 LinkedHashSet<Long> vtxSeq = msg.getVtxSeq();
 
                 if (Objects.equals(msg.firstVtxId(), curVtxId)) {
-                    if (cycleHasBeenDetected(vtxSeq, curVtx.getId())) {
-                        //discard,说明已经被检测过
+                    if (curVtxEqualsTheMinVtxOfAFoundCycle(vtxSeq, curVtx.getId())) {
+                        //throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
+                        long cycCount = cycleCount.incrementAndGet();
+                        System.out.println(
+                            "Standalone cycle found, count:" + cycCount + ", " + vtxSeq + "-" + curVtx.getId()
+                        );
                     } else {
-                        String vtxSeqStr = vtxSeq.stream().map(String::valueOf).collect(Collectors.joining("->"));
-                        throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
+                        //discard,说明已经被检测过
+                        //System.out.println("Cycle is already found:" + vtxSeq + "-" + curVtx.getId());
                     }
                 } else {
                     if (vtxSeq.contains(curVtxId)) {
@@ -127,11 +134,13 @@ public class Standalone {
     }
 
     /**
+     * 判断当前节点是否是一个已发现的环中的最小节点.从而排除多次发现同一个环
+     *
      * @param vtxSeq
      * @param vtxId
      * @return
      */
-    private boolean cycleHasBeenDetected(LinkedHashSet<Long> vtxSeq, Long vtxId) {
+    private boolean curVtxEqualsTheMinVtxOfAFoundCycle(LinkedHashSet<Long> vtxSeq, Long vtxId) {
         Long minVtxId = vtxSeq
             .stream()
             .min(Long::compareTo)

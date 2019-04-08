@@ -5,9 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
-import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
@@ -23,14 +21,16 @@ import personal.leo.dcd.util.MsgBus;
 @Getter
 public class Worker implements Runnable {
 
+    private CycleCounter cycleCounter;
     private int id;
     @Setter
     private CountDownLatch latch;
     @Setter
     private int round;
 
-    public Worker(int id) {
+    public Worker(int id, CycleCounter cycleCounter) {
         this.id = id;
+        this.cycleCounter = cycleCounter;
     }
 
     @Override
@@ -70,12 +70,16 @@ public class Worker implements Runnable {
                 LinkedHashSet<Long> vtxSeq = msg.getVtxSeq();
 
                 if (Objects.equals(msg.firstVtxId(), curVtxId)) {
-                    if (cycleHasBeenDetected(vtxSeq, curVtx.getId())) {
+                    if (curVtxEqualsTheMinVtxOfAFoundCycle(vtxSeq, curVtx.getId())) {
                         //discard,说明已经被检测过
-                    } else {
-                        String vtxSeqStr = vtxSeq.stream().map(String::valueOf).collect(Collectors.joining("->"));
-                        System.out.println("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
                         //throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
+                        long cycCount = cycleCounter.increAndGet();
+                        System.out.println(
+                            "PseudoDistributed cycle found,count:" + cycCount + ", cycle:" + vtxSeq + "-" + curVtx
+                                .getId()
+                        );
+                    } else {
+                        //System.out.println("Cycle is already found:" + vtxSeq + "-" + curVtx.getId());
                     }
                 } else {
                     if (vtxSeq.contains(curVtxId)) {
@@ -114,11 +118,13 @@ public class Worker implements Runnable {
     }
 
     /**
+     * 判断当前节点是否是一个已发现的环中的最小节点.从而排除多次发现同一个环
+     *
      * @param vtxSeq
      * @param vtxId
      * @return
      */
-    private boolean cycleHasBeenDetected(LinkedHashSet<Long> vtxSeq, Long vtxId) {
+    private boolean curVtxEqualsTheMinVtxOfAFoundCycle(LinkedHashSet<Long> vtxSeq, Long vtxId) {
         Long minVtxId = vtxSeq
             .stream()
             .min(Long::compareTo)
