@@ -6,9 +6,9 @@ Implement of Distributed cycle detection in large-scale sparse graphs
 论文url:https://github.com/leoChaoGlut/Distributed-Cycle-Detection/blob/master/Distributed%20cycle%20detection%20in%20large-scale%20sparse%20graphs.pdf
 
 # 使用方法
-1. **RandomDag**:  personal.leo.dcd.util.RandomDagTest
-2. **Standalone**:  personal.leo.dcd.impl.standalone.StandaloneTest
-3. **PseudoDistributed**:  personal.leo.dcd.impl.distributed.pseudo.PseudoDistributedTest
+1. **RandomDag(随机生成dag的算法)**:  personal.leo.dcd.util.RandomDagTest
+2. **Standalone(单机版)**:  personal.leo.dcd.impl.standalone.StandaloneTest
+3. **PseudoDistributed(伪分布式版)**:  personal.leo.dcd.impl.distributed.pseudo.PseudoDistributedTest
 
 # 说明
 1. 测试生成的 dag 数据,可到 http://www.dagitty.net/dags.html 进行可视化绘图.
