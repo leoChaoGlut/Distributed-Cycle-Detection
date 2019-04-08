@@ -63,7 +63,7 @@ public class BaseTest {
         return rd.draw();
     }
 
-    protected void createCycle(List<Vertex> vtxs) {
+    protected void createCycle(List<Vertex> vtxs, int expectedCycleCount) {
         Vertex rootVtx = null;
         for (Vertex vtx : vtxs) {
             if (vtx.getId() == -1L) {
@@ -76,11 +76,20 @@ public class BaseTest {
             throw new RuntimeException("Cannot found root vertex");
         }
 
-        Vertex rdVtx = vtxs.get(RandomUtils.nextInt(0, vtxs.size()));
+        for (int i = 0; i < expectedCycleCount; i++) {
+            Vertex rdVtx = vtxs.get(RandomUtils.nextInt(0, vtxs.size()));
+            rdVtx.out(rootVtx);
+            System.out.println("Create cycle between " + rdVtx.getId() + " and " + rootVtx.getId());
+        }
 
-        rdVtx.out(rootVtx);
     }
 
+    /**
+     * 这是已经提前测试好,准备好的一份数据,有一定代表性,数据量不多也不少
+     *
+     * @return
+     * @throws IOException
+     */
     protected List<Vertex> jsonData() throws IOException {
         String json = read(relationsFilePath);
         return JSON.parseArray(json, Vertex.class);

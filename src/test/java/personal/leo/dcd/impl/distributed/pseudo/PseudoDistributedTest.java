@@ -60,12 +60,12 @@ public class PseudoDistributedTest extends BaseTest {
         int workerCount = 16;
 
         Stopwatch watch = Stopwatch.createStarted();
-        //List<Vertex> vtxs = randomData(10_000_000, 10_000_000);
-        List<Vertex> vtxs = jsonData();
+        List<Vertex> vtxs = randomData(500_000, 500_000);
+        //List<Vertex> vtxs = jsonData();
         System.out.println(vtxs.size());
         System.out.println(watch.stop());
 
-        createCycle(vtxs);
+        createCycle(vtxs, 10);
 
         watch.reset().start();
         Long cycleCount = PseudoDistributed.run(workerCount, vtxs);

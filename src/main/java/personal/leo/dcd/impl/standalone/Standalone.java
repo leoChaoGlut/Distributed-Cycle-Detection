@@ -94,12 +94,12 @@ public class Standalone {
                             "Standalone cycle found, count:" + cycCount + ", " + vtxSeq + "-" + curVtx.getId()
                         );
                     } else {
-                        //discard,说明已经被检测过
+                        //discard,环已经被检测过
                         //System.out.println("Cycle is already found:" + vtxSeq + "-" + curVtx.getId());
                     }
                 } else {
                     if (vtxSeq.contains(curVtxId)) {
-                        //discard,说明已经被检测过
+                        //discard,环已经被检测过
                     } else {
                         for (Long outNeighborVtxId : curVtx.getOutNeighborVtxIds()) {
                             MsgBus.append(

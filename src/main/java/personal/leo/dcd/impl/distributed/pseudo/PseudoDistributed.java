@@ -90,6 +90,8 @@ public class PseudoDistributed {
                 }
             }
         }
+
+        //VertexHolder.print();
     }
 
     private void distributedDetect(ExecutorService es, int round, CountDownLatch latch) {

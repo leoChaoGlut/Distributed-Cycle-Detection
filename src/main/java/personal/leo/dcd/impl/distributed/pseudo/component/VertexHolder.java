@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
@@ -55,5 +56,11 @@ public class VertexHolder {
             .stream()
             .flatMap(Collection::stream)
             .anyMatch(Vertex::isActive);
+    }
+
+    public static void print() {
+        for (Entry<Integer, List<Vertex>> entry : vtxHolder.entrySet()) {
+            System.out.println("Worker" + entry.getKey() + ":" + entry.getValue().size());
+        }
     }
 }

@@ -37,7 +37,6 @@ public class Worker implements Runnable {
     public void run() {
         try {
             List<Vertex> activeVtxs = VertexHolder.fetchActived(id);
-
             for (Vertex activeVtx : activeVtxs) {
                 detect(round, activeVtx);
             }
@@ -71,19 +70,21 @@ public class Worker implements Runnable {
 
                 if (Objects.equals(msg.firstVtxId(), curVtxId)) {
                     if (curVtxEqualsTheMinVtxOfAFoundCycle(vtxSeq, curVtx.getId())) {
-                        //discard,说明已经被检测过
                         //throw new RuntimeException("Circular found: " + vtxSeqStr + "->" + curVtx.getId());
                         long cycCount = cycleCounter.increAndGet();
                         System.out.println(
-                            "PseudoDistributed cycle found,count:" + cycCount + ", cycle:" + vtxSeq + "-" + curVtx
-                                .getId()
+                            Thread.currentThread().getId() + "-" +
+                                "Worker-" + id + " found a cycle:" + vtxSeq + "-" + curVtx.getId()
+                                + ",current count:"
+                                + cycCount
                         );
                     } else {
+                        //discard,环已经被检测过
                         //System.out.println("Cycle is already found:" + vtxSeq + "-" + curVtx.getId());
                     }
                 } else {
                     if (vtxSeq.contains(curVtxId)) {
-                        //discard,说明已经被检测过
+                        //discard,环已经被检测过
                     } else {
                         for (Long outNeighborVtxId : curVtx.getOutNeighborVtxIds()) {
                             MsgBus.append(
