@@ -11,5 +11,5 @@ Implement of Distributed cycle detection in large-scale sparse graphs
 3. **PseudoDistributed**:  personal.leo.dcd.impl.distributed.pseudo.PseudoDistributedTest
 
 # 说明
-1. 测试生成的 dag 数据,可到 http://www.dagitty.net/dags.html 进行绘图.
+1. 测试生成的 dag 数据,可到 http://www.dagitty.net/dags.html 进行可视化绘图.
 2. 所有的 Test 类 **以注解 @Test 开头的**,**命名有意义的public方法**,都是可用的测试方法.
