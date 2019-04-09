@@ -51,7 +51,8 @@ public class PseudoDistributedTest extends BaseTest {
 
         List<Vertex> vtxs = Arrays.asList(v1, v2, v3, v4, v5);
 
-        PseudoDistributed.run(workerCount, vtxs);
+        Long cycleCount = PseudoDistributed.run(workerCount, vtxs);
+        System.out.println("PseudoDistributed: " + cycleCount);
 
     }
 

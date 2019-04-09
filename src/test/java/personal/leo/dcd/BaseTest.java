@@ -22,14 +22,14 @@ import personal.leo.dcd.util.RandomDag;
  */
 public class BaseTest {
 
-    protected String allVtxsWithoutNeighborsFilePath =
-        "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/allVtxsWithoutNeighbors.json";
+    protected String allVtxsWithoutNeighborsFilePath
+        = BaseTest.class.getClassLoader().getResource("dag/allVtxsWithoutNeighbors.json").getPath();
 
     protected String relationsFilePath
-        = "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/relations.json";
+        = BaseTest.class.getClassLoader().getResource("dag/relations.json").getPath();
 
     protected String dagittyFilePath
-        = "/Users/leo/gitRepo/github/Distributed-Cycle-Detection/src/test/resources/dag/dagitty.txt";
+        = BaseTest.class.getClassLoader().getResource("dag/dagitty.txt").getPath();
 
     protected String read(String filePath) throws IOException {
         return IOUtils.toString(new FileInputStream(filePath), StandardCharsets.UTF_8);
@@ -39,6 +39,11 @@ public class BaseTest {
         IOUtils.write(fileContent, new FileOutputStream(filePath), StandardCharsets.UTF_8);
     }
 
+    /**
+     * 论文中提供的简单数据
+     *
+     * @return
+     */
     protected List<Vertex> simpleData() {
         Vertex v1 = new Vertex(Id.next());
         Vertex v2 = new Vertex(Id.next());
@@ -58,11 +63,22 @@ public class BaseTest {
         return randomData(10, 10);
     }
 
+    /**
+     * 随机数据
+     *
+     * @param maxNodeCount
+     * @param edgeCount
+     * @return
+     */
     protected List<Vertex> randomData(int maxNodeCount, int edgeCount) {
         RandomDag rd = RandomDag.line(maxNodeCount, edgeCount);
         return rd.draw();
     }
 
+    /**
+     * @param vtxs
+     * @param expectedCycleCount 期望有多少个环,但是不一定保证有这么多个.
+     */
     protected void createCycle(List<Vertex> vtxs, int expectedCycleCount) {
         Vertex rootVtx = null;
         for (Vertex vtx : vtxs) {
